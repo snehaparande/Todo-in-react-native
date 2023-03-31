@@ -29,8 +29,12 @@ const GoalInput: React.FC<GoalInputProp> = ({onAddGoal, onCancel}) => {
         onSubmitEditing={handleAddGoal}
       />
       <View style={styles.buttonContainer}>
-        <Button title="Cancel" onPress={onCancel} />
-        <Button title="Add goal" onPress={handleAddGoal} />
+        <View style={styles.button}>
+          <Button title="Cancel" onPress={onCancel} />
+        </View>
+        <View style={styles.button}>
+          <Button title="Add goal" onPress={handleAddGoal} />
+        </View>
       </View>
     </View>
   );
@@ -45,11 +49,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     padding: 10,
     borderBottomColor: '#007aff54',
+    marginBottom: 10,
   },
   buttonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  button: {
+    margin: 5,
   },
 });
 

@@ -75,11 +75,16 @@ const App = () => {
           options={{headerTitle: () => <GoalLogo />}}>
           {({navigation}) => (
             <View style={styles.sectionContainer}>
-              <StatusBar barStyle={'light-content'} />
-              <Button
-                title="Add new goal"
-                onPress={() => navigation.navigate('AddGoal')}
+              <StatusBar
+                barStyle={'light-content'}
+                backgroundColor={'#007AFF'}
               />
+              <View style={styles.button}>
+                <Button
+                  title="Add new goal"
+                  onPress={() => navigation.navigate('AddGoal')}
+                />
+              </View>
               <GoalItems goalItems={goalItems} onDelete={handleDeleteGoal} />
             </View>
           )}
@@ -107,36 +112,27 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
   header: {
-    flex: 1,
+    flex: 0.9,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerTitle: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
   },
   logo: {
     height: 25,
     width: 27,
     marginRight: 5,
+  },
+  sectionContainer: {
+    padding: 20,
+  },
+  button: {
+    marginVertical: 15,
   },
 });
 
