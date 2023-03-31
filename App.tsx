@@ -38,7 +38,9 @@ const fetchData = async () => {
 };
 
 const App = () => {
-  const [goalItems, setGoalItems] = useState<{text: string; key: number}[]>([]);
+  const [goalItems, setGoalItems] = useState<
+    {text: string; key: number; isDone: boolean}[]
+  >([]);
 
   useEffect(() => {
     fetchData().then(x => {
@@ -52,7 +54,7 @@ const App = () => {
     setGoalItems(oldItems => {
       const newGoalItems = [
         ...oldItems,
-        {text: enterdText, key: new Date().getTime()},
+        {text: enterdText, key: new Date().getTime(), isDone: false},
       ];
       storeData(newGoalItems);
       return newGoalItems;
@@ -62,6 +64,19 @@ const App = () => {
   const handleDeleteGoal = (keyToBeDeleted: number) => {
     setGoalItems(items => {
       const newItems = items.filter(({key}) => key !== keyToBeDeleted);
+      storeData(newItems);
+      return newItems;
+    });
+  };
+
+  const handleOnCheckGoal = (keyToCheck: number, isChecked: boolean) => {
+    setGoalItems(items => {
+      const newItems = items.map(item => {
+        if (item.key === keyToCheck) {
+          item.isDone = isChecked;
+        }
+        return item;
+      });
       storeData(newItems);
       return newItems;
     });
@@ -85,7 +100,11 @@ const App = () => {
                   onPress={() => navigation.navigate('AddGoal')}
                 />
               </View>
-              <GoalItems goalItems={goalItems} onDelete={handleDeleteGoal} />
+              <GoalItems
+                goalItems={goalItems}
+                onCheck={handleOnCheckGoal}
+                onDelete={handleDeleteGoal}
+              />
             </View>
           )}
         </Stack.Screen>
